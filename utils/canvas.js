@@ -34,6 +34,23 @@ class Canvas {
     }
   }
 
+  scale() {
+    // Get the DPR and size of the canvas
+    const dpr = W.devicePixelRatio;
+    const rect = this.cvs.getBoundingClientRect();
+
+    // Set the "actual" size of the canvas
+    this.cvs.width = rect.width * dpr;
+    this.cvs.height = rect.height * dpr;
+
+    // Scale the context to ensure correct drawing operations
+    this.ctx.scale(dpr, dpr);
+
+    // Set the "drawn" size of the canvas
+    this.cvs.style.width = `${rect.width}px`;
+    this.cvs.style.height = `${rect.height}px`;
+  }
+
   print_stats() {
     const pixelRatio = W.devicePixelRatio;
     const sizeOnScreen = this.cvs.getBoundingClientRect();
