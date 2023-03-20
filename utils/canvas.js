@@ -6,7 +6,6 @@ class Canvas {
     this.cvs = D.body.appendChild(D.createElement("canvas"));
     this.cvs.height = max(desired_height, this.DEFAULT_HEIGHT);
     this.cvs.width = ~~(this.cvs.height * this.ASPECT_RATIO);
-    this.ctx = this.cvs.getContext("2d", { alpha: false });
   }
 
   background(hexColor) {
@@ -34,7 +33,7 @@ class Canvas {
     }
   }
 
-  scale() {
+  set_pixel_density() {
     // Get the DPR and size of the canvas
     const dpr = W.devicePixelRatio;
     const rect = this.cvs.getBoundingClientRect();
@@ -43,12 +42,21 @@ class Canvas {
     this.cvs.width = rect.width * dpr;
     this.cvs.height = rect.height * dpr;
 
-    // Scale the context to ensure correct drawing operations
-    this.ctx.scale(dpr, dpr);
-
     // Set the "drawn" size of the canvas
     this.cvs.style.width = `${rect.width}px`;
     this.cvs.style.height = `${rect.height}px`;
+
+    // Fetch the context.
+    const ctx = this.cvs.getContext("2d", { alpha: false });
+
+    // Scale the context to ensure correct drawing operations
+    ctx.scale(dpr, dpr);
+
+    // TODO: remove this
+    this.print_stats();
+
+    // Return the modified context.
+    return ctx;
   }
 
   print_stats() {
