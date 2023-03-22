@@ -18,13 +18,21 @@
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./test/drawings.js"></script>
   <script type="text/javascript">
-    const cnv = new Canvas(300);
+    // function getHeight(targetHeight) {
+    //   const printHeight = new URLSearchParams(W.location.search).get("height");
+    //   if (printHeight) {
+    //     console.log("Choosing print height: " + printHeight);
+    //     return printHeight;
+    //   }
+    //   if (targetHeight && targetHeight > DEFAULT_HEIGHT) {
+    //     console.log("Choosing target height: " + targetHeight);
+    //     return targetHeight;
+    //   }
+    //   console.log("Choosing default height: " + DEFAULT_HEIGHT);
+    //   return DEFAULT_HEIGHT;
+    // }
 
-    // cnv.background("#8bb3b4");
-    // cnv.set_style();
-
-    const ctx = cnv.set_pixel_density();
-
+    const ctx = new Canvas(400, "#8bb3b4").init();
     canvas_api_300_x_400_px(ctx);
   </script>
 </html>
