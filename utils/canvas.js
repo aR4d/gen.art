@@ -41,6 +41,42 @@ const Canvas = function (targetHeight, backgroundHexColor) {
     return ctx;
   };
 
+  this.init_for_print = function () {
+    // Create the canvas element
+    const cvs = D.body.appendChild(D.createElement("canvas"));
+
+    // Set the "actual" size of the canvas
+    cvs.height = targetHeight;
+    cvs.width = ~~(targetHeight * ASPECT_RATIO);
+
+    // Set the "drawn" size of the canvas
+    const s = cvs.style;
+    s.position = "absolute";
+    s.display = "block";
+    s.top = s.left = s.right = s.bottom = "0";
+    s.margin = "auto";
+    if (W.innerWidth / W.innerHeight < ASPECT_RATIO) {
+      s.width = "100%";
+      s.height = "auto";
+    } else {
+      s.width = "auto";
+      s.height = "100%";
+    }
+
+    // Fetch the context.
+    const ctx = cvs.getContext("2d", { alpha: false });
+
+    // Scale the context to ensure correct drawing operations
+    const sc = targetHeight / REF_HEIGHT;
+    ctx.scale(sc, sc);
+
+    // Set background color
+    ctx.fillStyle = backgroundHexColor;
+    ctx.fillRect(0, 0, cvs.width, cvs.height);
+
+    return ctx;
+  };
+
   // Do not include this in production code
   function log(canvas) {
     const sizeOnScreen = canvas.getBoundingClientRect();
