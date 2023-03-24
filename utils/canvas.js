@@ -2,6 +2,7 @@
 // 1.Scales on high density retina display resolutions
 // 2.Scales for quality print of printed artwork at specific pixel size
 const Canvas = function (targetHeight, backgroundHexColor) {
+  // The dimensions at which the artwork was designed
   const REF_HEIGHT = 400;
   const ASPECT_RATIO = 3 / 4;
 
@@ -27,7 +28,8 @@ const Canvas = function (targetHeight, backgroundHexColor) {
     const ctx = cvs.getContext("2d", { alpha: false });
 
     // Scale the context to ensure correct drawing operations
-    ctx.scale(dpr, dpr);
+    const sc = targetHeight / REF_HEIGHT;
+    ctx.scale(sc * dpr, sc * dpr);
 
     // Set background color
     ctx.fillStyle = backgroundHexColor;
