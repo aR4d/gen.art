@@ -1,5 +1,6 @@
 const D = document;
 const W = window;
+const DEBUG = true;
 
 const round = Math.round,
   floor = Math.floor,
