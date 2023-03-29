@@ -1,7 +1,7 @@
 // Creates an HTML canvas element that:
 // 1.Scales on high density retina display resolutions
 // 2.Scales for quality print of printed artwork at specific pixel size
-const Canvas = function (targetHeight, backgroundHexColor) {
+const Canvas = function (targetHeight) {
   // The dimensions at which the artwork was designed
   const REF_HEIGHT = 400;
   const ASPECT_RATIO = 3 / 4;
@@ -10,8 +10,8 @@ const Canvas = function (targetHeight, backgroundHexColor) {
   // then Hi-Resolution scaling does NOT happen automatically.
   // 2. If the target height is NOT specified, we assume the artowrk is rendered on a website
   // then Hi-Resolution scaling happens automatically AND
-  // the canvas is sized according to the parent element
-  this.init = function () {
+  // the canvas is sized to the dimensions it was designed at
+  this.init = function (backgroundHexColor) {
     // Create the canvas element
     const cvs = D.body.appendChild(D.createElement("canvas"));
 
@@ -24,8 +24,7 @@ const Canvas = function (targetHeight, backgroundHexColor) {
       dpr = 1;
     } else {
       log("Sizing for web render.");
-      // h = height of the parent element
-      h = 800; // TODO: for now
+      h = REF_HEIGHT;
       dpr = W.devicePixelRatio;
     }
 
@@ -70,7 +69,7 @@ const Canvas = function (targetHeight, backgroundHexColor) {
     return ctx;
   };
 
-  this.init_for_web_render = function () {
+  this.init_for_web_render = function (backgroundHexColor) {
     const h = targetHeight;
     const w = ~~(targetHeight * ASPECT_RATIO);
 
@@ -102,7 +101,7 @@ const Canvas = function (targetHeight, backgroundHexColor) {
     return ctx;
   };
 
-  this.init_for_print = function () {
+  this.init_for_print = function (backgroundHexColor) {
     // Create the canvas element
     const cvs = D.body.appendChild(D.createElement("canvas"));
 
@@ -149,6 +148,7 @@ const Canvas = function (targetHeight, backgroundHexColor) {
     const sizeOnScreen = canvas.getBoundingClientRect();
     log(`Aspect Ratio: ${ASPECT_RATIO}`);
     log(`Device Pixel Ratio: ${W.devicePixelRatio}`);
+    log(`Window Inner Height: ${W.innerHeight}`);
     log(`Canvas size on screen: W = ${sizeOnScreen.width} H = ${sizeOnScreen.height}`);
     log(`Canvas HTML: W = ${canvas.width} H = ${canvas.height}`);
     log(`Canvas CSS: W = ${canvas.style.width} H = ${canvas.style.height}`);
