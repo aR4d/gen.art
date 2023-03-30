@@ -8,7 +8,7 @@ const Canvas = function (targetHeight) {
 
   // 1. If target height is specified, we assume that is the physical IRL print size,
   // then Hi-Resolution scaling does NOT happen automatically.
-  // 2. If the target height is NOT specified, we assume the artowrk is rendered on a website
+  // 2. If the target height is NOT specified, we assume the artowrk is rendered digitally
   // then Hi-Resolution scaling happens automatically AND
   // the canvas is sized to the dimensions it was designed at
   this.init = function (backgroundHexColor) {
@@ -65,74 +65,6 @@ const Canvas = function (targetHeight) {
 
     // Log canvas info
     log_canvas_info(cvs);
-
-    return ctx;
-  };
-
-  this.init_for_web_render = function (backgroundHexColor) {
-    const h = targetHeight;
-    const w = ~~(targetHeight * ASPECT_RATIO);
-
-    // Create the canvas element
-    const cvs = D.body.appendChild(D.createElement("canvas"));
-
-    // Get the DPR and size of the canvas
-    const dpr = W.devicePixelRatio;
-
-    // Set the "actual" size of the canvas
-    cvs.height = ~~(h * dpr);
-    cvs.width = ~~(w * dpr);
-
-    // Set the "drawn" size of the canvas
-    cvs.style.height = `${h}px`;
-    cvs.style.width = `${w}px`;
-
-    // Fetch the context.
-    const ctx = cvs.getContext("2d", { alpha: false });
-
-    // Scale the context to ensure correct drawing operations
-    const sc = targetHeight / REF_HEIGHT;
-    ctx.scale(sc * dpr, sc * dpr);
-
-    // Set background color
-    ctx.fillStyle = backgroundHexColor || "#EADDCA";
-    ctx.fillRect(0, 0, cvs.width, cvs.height);
-
-    return ctx;
-  };
-
-  this.init_for_print = function (backgroundHexColor) {
-    // Create the canvas element
-    const cvs = D.body.appendChild(D.createElement("canvas"));
-
-    // Set the "actual" size of the canvas
-    cvs.height = targetHeight;
-    cvs.width = ~~(targetHeight * ASPECT_RATIO);
-
-    // Set the "drawn" size of the canvas
-    const s = cvs.style;
-    s.position = "absolute";
-    s.display = "block";
-    s.top = s.left = s.right = s.bottom = "0";
-    s.margin = "auto";
-    if (W.innerWidth / W.innerHeight < ASPECT_RATIO) {
-      s.width = "100%";
-      s.height = "auto";
-    } else {
-      s.width = "auto";
-      s.height = "100%";
-    }
-
-    // Fetch the context.
-    const ctx = cvs.getContext("2d", { alpha: false });
-
-    // Scale the context to ensure correct drawing operations
-    const sc = targetHeight / REF_HEIGHT;
-    ctx.scale(sc, sc);
-
-    // Set background color
-    ctx.fillStyle = backgroundHexColor || "#EADDCA";
-    ctx.fillRect(0, 0, cvs.width, cvs.height);
 
     return ctx;
   };
