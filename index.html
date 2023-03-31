@@ -15,6 +15,7 @@
   </head>
   <body></body>
   <script type="text/javascript" src="./utils/globals.js"></script>
+  <script type="text/javascript" src="./utils/colors.js"></script>
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./test/drawings.js"></script>
   <script type="text/javascript">
@@ -36,5 +37,8 @@
     // const ctx = new Canvas(400).init_for_web_render();
     const ctx = new Canvas(929).init();
     canvas_api_300_x_400_px(ctx);
+
+    console.log(hex2rgb("#ff8400"));
+    console.log(hex2hsl("#ff8400"));
   </script>
 </html>

@@ -4,8 +4,10 @@ const DEBUG = true;
 
 const round = Math.round,
   floor = Math.floor,
+  min = Math.min,
   max = Math.max,
-  rand = Math.random;
+  rand = Math.random,
+  abs = Math.abs;
 
 const tokenData = {
   tokenId: "163000801",
