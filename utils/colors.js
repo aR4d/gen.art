@@ -1,4 +1,3 @@
-// color modulation
 // perceived color compute?
 
 function hex2hsl(hex) {
@@ -17,5 +16,5 @@ function rgb2hsl(r, g, b) {
     c = v - min(r, g, b),
     f = 1 - abs(v + v - c - 1);
   let h = c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c);
-  return [round(60 * (h < 0 ? h + 6 : h)), f ? c / f : 0, (v + v - c) / 2];
+  return [60 * (h < 0 ? h + 6 : h), f ? c / f : 0, (v + v - c) / 2];
 }
