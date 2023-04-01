@@ -7,7 +7,10 @@ const round = Math.round,
   min = Math.min,
   max = Math.max,
   rand = Math.random,
-  abs = Math.abs;
+  abs = Math.abs,
+  sin = Math.sin,
+  cos = Math.cos,
+  PI = Math.PI;
 
 const tokenData = {
   tokenId: "163000801",
