@@ -14,10 +14,12 @@
     <!-- <script src="p5.js"></script> -->
   </head>
   <body></body>
+  <script type="text/javascript" src="./utils/random.js"></script>
   <script type="text/javascript" src="./utils/globals.js"></script>
   <script type="text/javascript" src="./utils/colors.js"></script>
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./test/drawings.js"></script>
+  <script type="text/javascript" src="./effects/watercolor.js"></script>
   <script type="text/javascript">
     // function getHeight(targetHeight) {
     //   const printHeight = new URLSearchParams(W.location.search).get("height");
@@ -35,10 +37,13 @@
 
     // const ctx = new Canvas(400, "#8bb3b4").init();
     // const ctx = new Canvas(400).init_for_web_render();
-    const ctx = new Canvas(929).init();
-    canvas_api_300_x_400_px(ctx);
 
-    console.log(hex2rgb("#00bfff"));
-    console.log(hex2hsl("#00bfff"));
+    const ctx = new Canvas().init();
+    // canvas_api_300_x_400_px(ctx);
+
+    canvas_api_300_x_400_px_modulated_polygons(ctx);
+
+    console.log(hex2rgb("#ff4800"));
+    console.log(hex2hsl("#ff4800"));
   </script>
 </html>

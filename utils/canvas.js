@@ -69,12 +69,6 @@ const Canvas = function (targetHeight) {
     return ctx;
   };
 
-  function log(msg) {
-    if (DEBUG) {
-      console.log(msg);
-    }
-  }
-
   // Do not include this in production code
   function log_canvas_info(canvas) {
     const sizeOnScreen = canvas.getBoundingClientRect();
