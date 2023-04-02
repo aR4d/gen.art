@@ -7,7 +7,7 @@ function modulateHEX(hex, v) {
   return modulateHSL({ h: hsl[0], s: hsl[1], l: hsl[2] }, v, v, v);
 }
 
-// Modulates a HSL color
+// Modulates a HSL color, in: { h: [0-360], s: [0-100], l:[0-100] }
 // hV - HUE variance range in [0, 360)
 // sV - SATURATION variance range in [0, 50%]
 // lV - LIGHTNESS variance range in [0, 50%]
@@ -42,6 +42,7 @@ function adjust_modulation_interval(b, v, e) {
   return [b - v / 2, b + v / 2];
 }
 
+// in: #ff4800, out: [h, s, l] -> h in [0-360) and s,l in [0-100]
 function hex2hsl(hex) {
   return rgb2hsl(...hex2rgb(hex));
 }
@@ -51,7 +52,7 @@ function hex2rgb(hex) {
   return [((i = parseInt(hex.substr(1), 16)) >> 16) & 255, (i >> 8) & 255, i & 255];
 }
 
-// in: r,g,b in [0,255], out: h in [0,360) and s,l in [0,1]
+// in: r,g,b in [0,255], out: [h, s, l] -> h in [0-360) and s,l in [0-100]
 function rgb2hsl(r, g, b) {
   (r /= 255), (g /= 255), (b /= 255);
   let v = max(r, g, b),
