@@ -8,16 +8,37 @@ function modulateHEX(hex, v) {
 
 // Modulates a HSL color
 // hV - HUE variance range in [0, 360)
-// sV - SATURATION variance range in [0, 0.5]
-// lV - LIGHTNESS variance range in [0, 0.5]
+// sV - SATURATION variance range in [0, 50%]
+// lV - LIGHTNESS variance range in [0, 50%]
 function modulateHSL(hsl, hV, sV, lV) {
-  // TODO: handle interval edge scenario!
   return {
-    h: hsl.h + R.random_num(-hV, hV),
-    s: hsl.s + R.random_num(-sV, sV),
-    l: hsl.l + R.random_num(-lV, lV),
+    h: modulated_value(hsl.h, hV, 360),
+    s: modulated_value(hsl.s, sV, 100),
+    l: modulated_value(hsl.l, lV, 100),
     a: 1,
   };
+}
+
+// Basically the same as the function below, only returns the actual modulated value
+// Target interval - [0, e]
+// b - base value in [0, e]
+// v - variance from base value [b - v/2, b + v / 2]
+// e - upper limit of interval
+function modulated_value(b, v, e) {
+  if (b < v / 2) return R.random_num(0, v);
+  if (e - b < v / 2) return R.random_num(e - v, e);
+  return R.random_num(b - v / 2, b + v / 2);
+}
+
+// Handles if the modulation interval start/end falls outside the target interval (e.g. [0, 100])
+// Target interval - [0, e]
+// b - base value in [0, e]
+// v - variance from base value [b - v/2, b + v / 2]
+// e - upper limit of interval
+function adjust_modulation_interval(b, v, e) {
+  if (b < v / 2) return [0, v];
+  if (e - b < v / 2) return [e - v, e];
+  return [b - v / 2, b + v / 2];
 }
 
 function hex2hsl(hex) {
