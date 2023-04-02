@@ -29,18 +29,21 @@ function p5js_300_x_400_px() {
 function canvas_api_300_x_400_px_modulated_polygons(ctx) {
   const colors = [
     {
+      hex: "#3c6837",
       h: 113,
       s: 31,
       l: 31,
       a: 1,
     },
     {
+      hex: "#e88945",
       h: 25,
       s: 78,
       l: 59,
       a: 1,
     },
     {
+      hex: "#d86e90",
       h: 341,
       s: 58,
       l: 64,
@@ -48,11 +51,22 @@ function canvas_api_300_x_400_px_modulated_polygons(ctx) {
     },
   ];
 
+  logColor(colors[0].hex);
+  logColor(colors[1].hex);
+  logColor(colors[2].hex);
+
   for (let i = 0; i < 600; i++) {
-    const c = modulateHSL(R.random_choice(colors), 10, 10, 10);
+    // const c = modulateHSL(R.random_choice(colors), 10, 10, 10);
+    const c = modulateHEX(R.random_choice(colors).hex, 10);
     // console.log(`hsl(${c.h},${c.s}%,${c.l}%,${c.a})`);
     ctx.fillStyle = `hsl(${c.h},${c.s}%,${c.l}%,${c.a})`;
     polygon(ctx, R.random_int(0, 300), R.random_int(0, 400), R.random_int(3, 8), R.random_int(3, 15), R.random_int(0, 360));
     ctx.fill();
   }
+}
+
+function logColor(hex) {
+  console.log("Logging color");
+  console.log(hex2rgb(hex));
+  console.log(hex2hsl(hex));
 }

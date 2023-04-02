@@ -3,7 +3,8 @@
 // Modulates a HEX color
 // v - modulation variance in [0,1]
 function modulateHEX(hex, v) {
-  return modulateHSL(hex2hsl(hex), v, v, v);
+  const hsl = hex2hsl(hex);
+  return modulateHSL({ h: hsl[0], s: hsl[1], l: hsl[2] }, v, v, v);
 }
 
 // Modulates a HSL color
