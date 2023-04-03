@@ -52,6 +52,11 @@ class Random {
   random_choice(list) {
     return list[this.random_int(0, list.length - 1)];
   }
+
+  // random real number from a standard Gaussian distribution
+  gaussian(mean = 0, stdev = 1) {
+    return Math.sqrt(-2.0 * Math.log(1 - this.random_dec())) * Math.cos(2.0 * Math.PI * this.random_dec()) * stdev + mean;
+  }
 }
 
 function random_hash() {
