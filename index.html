@@ -44,6 +44,15 @@
 
     // canvas_api_300_x_400_px_modulated_polygons(ctx);
 
-    split_segment([50, 50], [120, 200]);
+    split_segment([50, 50], [275, 50]);
+
+    ctx.fillStyle = "black";
+    ctx.strokeStyle = "black";
+    polygon_points(150, 200, 4, 50, 45).forEach((p) => {
+      console.log(`X=${p[0]}, Y=${p[1]}`);
+      ctx.fillRect(p[0], p[1], 5, 5);
+    });
+    draw_polygon(ctx, 150, 200, 4, 50, 45);
+    ctx.stroke();
   </script>
 </html>
