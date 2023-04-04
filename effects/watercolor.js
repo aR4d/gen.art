@@ -46,6 +46,8 @@ function split_segment_1(p1, p2) {
 //   }
 // }
 
+// ***** THIS AT LEAST WORKS ***** //
+
 function deform_polygon(ctx, pts) {
   const variance = 15;
   let pts0 = pts.slice(); // points - depth N
@@ -78,6 +80,19 @@ function drawPolygon(ctx, pts) {
     ctx.lineTo(pts[i][0], pts[i][1]);
   }
   ctx.closePath();
+}
+
+// ***** THIS AT LEAST WORKS ***** //
+
+function splitEdge(depth) {
+  if (depth === 0) {
+    console.log("Reached max depth.");
+    return;
+  }
+  console.log("Depth: " + depth);
+
+  splitEdge(depth - 1);
+  splitEdge(depth - 1);
 }
 
 // const Watercolor = function () {
