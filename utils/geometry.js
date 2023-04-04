@@ -4,8 +4,8 @@ const midpoint = ([x1, y1], [x2, y2]) => [(x1 + x2) / 2, (y1 + y2) / 2];
 function polygon_points(x, y, sides, size, rotation) {
   const theta = (rotation * PI) / 180;
   const pts = [];
-  for (var i = 1; i <= sides; i++)
-    pts.push([x + size * cos((i * 2 * PI) / sides + theta), y + size * sin((i * 2 * PI) / sides + theta)]);
+  for (let i = 1; i <= sides; i++)
+    pts.push([round(x + size * cos((i * 2 * PI) / sides + theta)), round(y + size * sin((i * 2 * PI) / sides + theta))]);
   return pts;
 }
 
@@ -13,7 +13,7 @@ function polygon_points(x, y, sides, size, rotation) {
 function draw_polygon(ctx, x, y, sides, size, rotation) {
   const theta = (rotation * PI) / 180;
   ctx.beginPath();
-  for (var i = 1; i <= sides; i++)
+  for (let i = 1; i <= sides; i++)
     ctx.lineTo(x + size * cos((i * 2 * PI) / sides + theta), y + size * sin((i * 2 * PI) / sides + theta));
   ctx.closePath();
 }

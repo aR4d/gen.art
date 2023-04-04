@@ -60,7 +60,7 @@ class Random {
 
 function random_hash() {
   let hash = "0x";
-  for (var i = 0; i < 64; i++) {
+  for (let i = 0; i < 64; i++) {
     hash += floor(Math.random() * 16).toString(16);
   }
   return hash;
