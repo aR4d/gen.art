@@ -17,3 +17,18 @@ function draw_polygon(ctx, x, y, sides, size, rotation) {
     ctx.lineTo(x + size * cos((i * 2 * PI) / sides + theta), y + size * sin((i * 2 * PI) / sides + theta));
   ctx.closePath();
 }
+
+// splits a line segment in the middle recursively
+// returns the array of points
+// depth = 1 -> 2 segments (3 points)
+// depth = 2 -> 4 segments (5 points)
+// depth = 3 -> 8 segments (9 points)
+function split_segment(depth, a, b) {
+  let pts0 = [a, b];
+  for (let d = 0; d < depth; d++) {
+    let pts1 = [pts0[0]];
+    for (let i = 0; i < pts0.length - 1; i++) pts1.push(midpoint(pts0[i], pts0[i + 1]), pts0[i + 1]);
+    pts0 = pts1;
+  }
+  return pts0;
+}
