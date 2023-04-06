@@ -18,6 +18,14 @@ function draw_polygon(ctx, x, y, sides, size, rotation) {
   ctx.closePath();
 }
 
+// draws any polygon
+// pts - [[x1, y1], [x2, y2], ...]
+function draw_polygon_from_points(ctx, pts) {
+  ctx.beginPath();
+  for (let i = 0; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+}
+
 // splits a line segment in the middle recursively
 // returns the array of points
 // depth = 1 -> 2 segments (3 points)

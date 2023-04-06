@@ -60,7 +60,7 @@ function canvas_api_300_x_400_px_modulated_polygons(ctx) {
     const c = modulateHEX(R.random_choice(colors).hex, 10);
     // console.log(`hsl(${c.h},${c.s}%,${c.l}%,${c.a})`);
     ctx.fillStyle = `hsl(${c.h},${c.s}%,${c.l}%,${c.a})`;
-    polygon(ctx, R.random_int(0, 300), R.random_int(0, 400), R.random_int(3, 8), R.random_int(3, 15), R.random_int(0, 360));
+    draw_polygon(ctx, R.random_int(0, 300), R.random_int(0, 400), R.random_int(3, 5), R.random_int(3, 15), R.random_int(0, 360));
     ctx.fill();
   }
 }

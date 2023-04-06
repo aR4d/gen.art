@@ -44,21 +44,15 @@
 
     // canvas_api_300_x_400_px_modulated_polygons(ctx);
 
-    // split_segment([50, 50], [275, 50]);
-
-    ctx.fillStyle = "black";
-    ctx.strokeStyle = "black";
+    ctx.fillStyle = "#8bb3b4";
+    ctx.strokeStyle = "#8bb3b4";
     ctx.lineWidth = 0.5;
-    // polygon_points(150, 200, 4, 50, 45).forEach((p) => {
-    //   console.log(`X=${p[0]}, Y=${p[1]}`);
-    //   ctx.fillRect(p[0], p[1], 5, 5);
-    // });
-    // draw_polygon(ctx, 150, 200, 4, 50, 45);
 
-    deform_polygon(ctx, polygon_points(150, 200, 4, 100, 45));
-
-    splitEdge(3);
+    console.time("looping #1");
+    watercolor(ctx);
+    console.timeEnd("looping #1");
 
     ctx.stroke();
+    ctx.fill();
   </script>
 </html>
