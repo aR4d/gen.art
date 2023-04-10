@@ -10,7 +10,7 @@ function watercolor_points() {
   // console.log(polygon);
 
   for (let i = 0; i < polygon.length; i++) {
-    pts.push(...split(4, 7, polygon[i], polygon[(i + 1) % polygon.length]));
+    pts.push(...split(1, 15, polygon[i], polygon[(i + 1) % polygon.length]).slice(1));
   }
 
   return pts;
