@@ -10,7 +10,7 @@
         padding: 0;
       }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script> -->
     <!-- <script src="p5.js"></script> -->
   </head>
   <body></body>
@@ -49,7 +49,8 @@
     ctx.lineWidth = 0.5;
 
     console.time("looping #1");
-    watercolor(ctx);
+    const w = new Watercolor(polygon_points(140, 200, 10, 100, 0));
+    w.draw(ctx);
     console.timeEnd("looping #1");
 
     ctx.stroke();
