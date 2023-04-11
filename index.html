@@ -38,6 +38,7 @@
 
     // const ctx = new Canvas(400, "#8bb3b4").init();
     // const ctx = new Canvas(400).init_for_web_render();
+    console.time("looping #1");
 
     const ctx = new Canvas().init();
     // canvas_api_300_x_400_px(ctx);
@@ -48,9 +49,7 @@
     // ctx.strokeStyle = "#8bb3b4";
     ctx.lineWidth = 0.5;
 
-    console.time("looping #1");
-
-    const polygon = polygon_points(140, 200, 15, 100, 0);
+    const polygon = polygon_points(140, 200, 7, 100, 00);
     const w1 = new Watercolor(polygon);
     w1.draw(ctx);
 

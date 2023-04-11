@@ -7,13 +7,25 @@ class Watercolor {
   }
 
   draw(ctx) {
-    ctx.fillStyle = "hsla(181, 21%, 63%, 0.05)";
+    ctx.fillStyle = "hsla(11, 59%, 51%, 0.05)";
 
     for (let i = 0; i < 50; i++) {
-      const layer = this.deform(this.base, 3, 7);
+      // const layer = this.deform(this.base, 3, 7);
+      const layer = this.deform_with_variance_inheritance();
       draw_polygon_from_points(ctx, layer);
       ctx.fill();
     }
+  }
+
+  deform_with_variance_inheritance() {
+    const pts = [];
+    let stdev0;
+    for (let i = 0; i < this.base.length; i++) {
+      stdev0 = i < this.base.length / 2 ? 5 : 10;
+      pts.push(...this.split(3, stdev0, this.base[i], this.base[(i + 1) % this.base.length]).slice(1));
+    }
+
+    return pts;
   }
 
   deform(polygon, depth, stdev) {
