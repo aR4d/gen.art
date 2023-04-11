@@ -1,4 +1,5 @@
 const midpoint = ([x1, y1], [x2, y2]) => [(x1 + x2) / 2, (y1 + y2) / 2];
+const dist = ([x1, y1], [x2, y2]) => sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
 // gets the points for a regular polygon [[x1, y1], [x2, y2], ...]
 function polygon_points(x, y, sides, size, rotation) {

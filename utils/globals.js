@@ -1,4 +1,4 @@
-const RANDOM_HASH = true;
+const RANDOM_HASH = false;
 const DEBUG = true;
 const D = document;
 const W = window;
@@ -10,6 +10,7 @@ const round = Math.round,
   abs = Math.abs,
   sin = Math.sin,
   cos = Math.cos,
+  sqrt = Math.sqrt,
   PI = Math.PI;
 
 const tokenData = {
