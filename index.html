@@ -45,15 +45,28 @@
     // canvas_api_300_x_400_px_modulated_polygons(ctx);
 
     ctx.fillStyle = "#8bb3b4";
-    ctx.strokeStyle = "#8bb3b4";
+    // ctx.strokeStyle = "#8bb3b4";
     ctx.lineWidth = 0.5;
 
     console.time("looping #1");
-    const w = new Watercolor(polygon_points(140, 200, 8, 100, 0));
-    w.draw(ctx);
+
+    const polygon = polygon_points(140, 200, 15, 100, 0);
+    const w1 = new Watercolor(polygon);
+    w1.draw(ctx);
+
     console.timeEnd("looping #1");
 
-    ctx.stroke();
-    ctx.fill();
+    // arraysEqual(w1.base, w2.base);
+
+    // ctx.stroke();
+    // ctx.fill();
+
+    function arraysEqual(arr1, arr2) {
+      let equal = true;
+      if (arr1.length !== arr2.length) equal = false;
+      for (let i = 0; i < arr1.length; i++) if (arr1[i] !== arr2[i]) equal = false;
+
+      console.log(`Arrays are ${equal ? "" : "NOT "}equal.`);
+    }
   </script>
 </html>
