@@ -41,24 +41,28 @@
     console.time("looping #1");
 
     const ctx = new Canvas().init();
-    // canvas_api_300_x_400_px(ctx);
+    draw_canvas_center();
 
+    // canvas_api_300_x_400_px(ctx);
     // canvas_api_300_x_400_px_modulated_polygons(ctx);
 
     ctx.fillStyle = "#8bb3b4";
-    // ctx.strokeStyle = "#8bb3b4";
+    ctx.strokeStyle = "#8bb3b4";
     ctx.lineWidth = 0.5;
 
-    const polygon = polygon_points(140, 200, 7, 100, 00);
-    const w1 = new Watercolor(polygon);
+    // ctx.strokeRect(100, 150, 100, 100);
+    // ctx.stroke();
+
+    // for (let i = 0; i < 10000; i++) {
+    //   ctx.rect(round(R.gaussian(150, 10)), round(R.gaussian(200, 10)), 1, 1);
+    // }
+
+    const w1 = new Watercolor(140, 200, 100);
     w1.draw(ctx);
 
     console.timeEnd("looping #1");
 
-    // arraysEqual(w1.base, w2.base);
-
-    // ctx.stroke();
-    // ctx.fill();
+    ctx.fill();
 
     function arraysEqual(arr1, arr2) {
       let equal = true;
