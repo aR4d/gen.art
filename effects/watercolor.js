@@ -2,25 +2,27 @@
 class Watercolor {
   DEPTH = 3;
   MIX_VARIANCE = 4;
-  MAX_VARIANCE = 12;
-  VARIANCE_SHRINK_FACTOR = 1; // Decrease variance as depth increases
+  MAX_VARIANCE = 20;
+  VARIANCE_SHRINK_FACTOR = 0.87; // Decrease variance as depth increases
   LAYER_OPACITY = 0.04;
-  LAYER_COUNT = 50;
+  LAYER_COUNT = 70;
+  START_POLYGON_SIDES = 7;
   debug_midpoint_count = 0; // debugging only
 
   constructor(x, y, size) {
-    const polygon = this.polygon(x, y, 7, size);
-    console.log(polygon);
+    const polygon = this.polygon(x, y, this.START_POLYGON_SIDES, size);
+    // console.log(polygon);
 
     this.base = this.deform(polygon, this.DEPTH);
     console.log("Base points: " + this.base.length);
-    console.log(this.base);
+    // console.log(this.base);
   }
 
   draw(ctx) {
     ctx.fillStyle = `hsla(11, 59%, 51%, ${this.LAYER_OPACITY})`;
 
     for (let i = 0; i < this.LAYER_COUNT; i++) {
+      // const layer = this.deform(this.base, i < this.LAYER_COUNT / 3 ? 1 : 5);
       const layer = this.deform(this.base, this.DEPTH);
       draw_polygon_from_points(ctx, layer);
       ctx.fill();
