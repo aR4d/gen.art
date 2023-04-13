@@ -9,6 +9,8 @@ class Watercolor {
   START_POLYGON_SIDES = 7;
   debug_midpoint_count = 0; // debugging only
 
+  // x - center X
+  // y - center Y
   constructor(x, y, size) {
     const polygon = this.polygon(x, y, this.START_POLYGON_SIDES, size);
     // console.log(polygon);
@@ -18,8 +20,8 @@ class Watercolor {
     // console.log(this.base);
   }
 
-  draw(ctx) {
-    ctx.fillStyle = `hsla(11, 59%, 51%, ${this.LAYER_OPACITY})`;
+  draw(ctx, hsl) {
+    ctx.fillStyle = `hsla(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%, ${this.LAYER_OPACITY})`;
 
     for (let i = 0; i < this.LAYER_COUNT; i++) {
       // const layer = this.deform(this.base, i < this.LAYER_COUNT / 3 ? 1 : 5);

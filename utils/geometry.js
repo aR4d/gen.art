@@ -1,7 +1,11 @@
+// middle point between 2 points - 2D
 const midpoint = ([x1, y1], [x2, y2]) => [(x1 + x2) / 2, (y1 + y2) / 2];
+
+// distance between 2 points - 2D
 const dist = ([x1, y1], [x2, y2]) => sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
 // gets the points for a regular polygon [[x1, y1], [x2, y2], ...]
+// centered in [x, y]
 function polygon_points(x, y, sides, size, rotation) {
   const theta = (rotation * PI) / 180;
   const pts = [];
@@ -10,7 +14,7 @@ function polygon_points(x, y, sides, size, rotation) {
   return pts;
 }
 
-// draws regular polygon
+// draws regular polygon, centered in [x, y]
 function draw_polygon(ctx, x, y, sides, size, rotation) {
   const theta = (rotation * PI) / 180;
   ctx.beginPath();

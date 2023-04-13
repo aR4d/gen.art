@@ -19,6 +19,7 @@
   <script type="text/javascript" src="./utils/colors.js"></script>
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./utils/geometry.js"></script>
+  <script type="text/javascript" src="./utils/textures.js "></script>
   <script type="text/javascript" src="./test/drawings.js"></script>
   <script type="text/javascript" src="./effects/watercolor.js"></script>
   <script type="text/javascript">
@@ -58,10 +59,13 @@
     // }
 
     const w1 = new Watercolor(140, 200, 100);
-    w1.draw(ctx);
+    w1.draw(ctx, hex2hsl("#CC5439"));
+
+    rect_texture(ctx, 0, 0, 300, 400, 500, 5, 35);
 
     console.timeEnd("looping #1");
 
+    // ctx.stroke();
     ctx.fill();
 
     function arraysEqual(arr1, arr2) {
