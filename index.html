@@ -58,22 +58,27 @@
     //   ctx.rect(round(R.gaussian(150, 10)), round(R.gaussian(200, 10)), 1, 1);
     // }
 
-    const w1 = new Watercolor(140, 200, 100);
-    w1.draw(ctx, hex2hsl("#CC5439"));
+    // const w1 = new Watercolor(140, 200, 100);
+    // w1.draw(ctx, hex2hsl("#CC5439"));
 
-    rect_texture(ctx, 0, 0, 300, 400, 500, 5, 35);
+    // draw_texture(ctx, 0, 0, 300, 400, 5, 2, 30);
+
+    const count = 300;
+    const txt1 = new Textures(ctx, count, [0, 0], [150, 200]);
+    const txt2 = new Textures(ctx, count, [150, 0], [300, 200]);
+    const txt3 = new Textures(ctx, count, [0, 200], [150, 400]);
+    const txt4 = new Textures(ctx, count, [150, 200], [300, 400]);
+
+    txt1.info();
+
+    txt1.rectangles();
+    txt2.circles();
+    txt3.line();
 
     console.timeEnd("looping #1");
 
-    // ctx.stroke();
-    ctx.fill();
-
-    function arraysEqual(arr1, arr2) {
-      let equal = true;
-      if (arr1.length !== arr2.length) equal = false;
-      for (let i = 0; i < arr1.length; i++) if (arr1[i] !== arr2[i]) equal = false;
-
-      console.log(`Arrays are ${equal ? "" : "NOT "}equal.`);
+    function areEqual(obj1, obj2) {
+      return JSON.stringify(obj1) === JSON.stringify(obj2);
     }
   </script>
 </html>
