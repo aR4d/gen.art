@@ -70,3 +70,26 @@ function logColor(hex) {
   console.log(hex2rgb(hex));
   console.log(hex2hsl(hex));
 }
+
+function draw_lines(ctx) {
+  let y = 10;
+  const lines = new Lines(ctx);
+  ctx.lineWidth = 2;
+
+  for (let i = 0; i < 12; i++) {
+    if (i > 5) draw_line();
+    else draw_line(i);
+  }
+
+  function draw_line(i) {
+    ctx.beginPath();
+
+    if (i >= 0) lines.dash(i);
+    else lines.random_dash();
+
+    ctx.moveTo(10, y);
+    ctx.lineTo(200, y);
+    ctx.stroke();
+    y += 20;
+  }
+}
