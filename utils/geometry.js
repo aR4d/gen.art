@@ -57,9 +57,13 @@ function draw_canvas_center() {
   const ctx = canvases[0].getContext("2d", { alpha: false });
   ctx.strokeStyle = "black";
   ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
   ctx.moveTo(sizeOnScreen.width / 2, 0);
   ctx.lineTo(sizeOnScreen.width / 2, sizeOnScreen.height);
   ctx.moveTo(0, sizeOnScreen.height / 2);
   ctx.lineTo(sizeOnScreen.width, sizeOnScreen.height / 2);
   ctx.stroke();
+  ctx.closePath();
+  ctx.setLineDash([]);
 }

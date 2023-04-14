@@ -1,4 +1,4 @@
-const RANDOM_HASH = false;
+const RANDOM_HASH = true;
 const DEBUG = true;
 const D = document;
 const W = window;

@@ -16,6 +16,8 @@ class Textures {
   info() {
     log("");
     log("----Texture info----");
+    log("Top left corner: " + this.topLeft);
+    log("Bottom right corner: " + this.bottomRight);
     log("Rectangle width: " + this.width);
     log("Rectangle height: " + this.height);
     log("Count: " + this.count);
@@ -46,12 +48,13 @@ class Textures {
   circles() {
     let x, y, r;
     for (let i = 0; i < this.count; i++) {
+      this.ctx.beginPath();
       (x = this.x()), (y = this.y()), (r = ~~(this.size() / 2));
       this.ctx.fillStyle = this.transparent_black();
       this.ctx.moveTo(x + r, y);
       this.ctx.arc(x, y, r, 0, 2 * PI);
+      this.ctx.fill();
     }
-    this.ctx.fill();
   }
 
   line() {
@@ -62,6 +65,20 @@ class Textures {
     }
     this.ctx.stroke();
   }
+
+  hatch() {
+    const offset = this.height / this.count;
+    let y = this.topLeft[1] + offset;
+    // this.ctx.rotate((10 * PI) / 180);
+    for (let i = 0; i < this.count; i++) {
+      this.ctx.moveTo(this.topLeft[0], round(y));
+      this.ctx.lineTo(this.bottomRight[0], round(y));
+      y += offset;
+    }
+    this.ctx.stroke();
+  }
+
+  stripes() {}
 
   y() {
     return R.random_int(this.topLeft[1], this.bottomRight[1]);
