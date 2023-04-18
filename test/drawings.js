@@ -93,3 +93,9 @@ function draw_lines(ctx) {
     y += 20;
   }
 }
+
+function draw_bounding_box_test(ctx) {
+  const polygon = polygon_points(150, 200, 6, 50, 53);
+  draw_polygon_from_points(ctx, polygon);
+  draw_bounding_box(ctx, polygon);
+}

@@ -4,6 +4,29 @@ const midpoint = ([x1, y1], [x2, y2]) => [(x1 + x2) / 2, (y1 + y2) / 2];
 // distance between 2 points - 2D
 const dist = ([x1, y1], [x2, y2]) => sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
+// gets the top-left and bottom right corner points of a polygon
+// that define it's bounding box
+// polygon - [[x1, y1], [x2, y2], ...]
+function bounding_box_points(polygon) {
+  let xMin = (xMax = polygon[0][0]),
+    yMin = (yMax = polygon[0][1]);
+  for (let i = 0; i < polygon.length; i++) {
+    if (polygon[i][0] < xMin) xMin = polygon[i][0];
+    if (polygon[i][0] > xMax) xMax = polygon[i][0];
+    if (polygon[i][1] < yMin) yMin = polygon[i][1];
+    if (polygon[i][1] > yMax) yMax = polygon[i][1];
+  }
+  return [
+    [xMin, yMin],
+    [xMax, yMax],
+  ];
+}
+
+function draw_bounding_box(ctx, polygon) {
+  const bb = bounding_box_points(polygon);
+  ctx.rect(bb[0][0], bb[0][1], bb[1][0] - bb[0][0], bb[1][1] - bb[0][1]);
+}
+
 // gets the points for a regular polygon [[x1, y1], [x2, y2], ...]
 // centered in [x, y]
 function polygon_points(x, y, sides, size, rotation) {
@@ -29,6 +52,13 @@ function draw_polygon_from_points(ctx, pts) {
   ctx.beginPath();
   for (let i = 0; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
   ctx.closePath();
+}
+
+// draws a line from an initial point [x, y] using polar coordinates
+// theta in radians
+function draw_polar_line(ctx, [x, y], r, theta) {
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + r * cos(theta), y + r * sin(theta));
 }
 
 // splits a line segment in the middle recursively
