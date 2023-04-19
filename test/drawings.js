@@ -124,11 +124,18 @@ function lines_hatch_test(ctx) {
     [200, 151],
     [272, 233],
   ];
-  // const plgn = polygon_points(150, 200, 5, 70, 28);
+  // const plgn = polygon_points(150, 200, 5, 70, 225);
+
+  // ctx.save();
   draw_polygon_from_points(ctx, plgn);
+  ctx.clip();
 
   const hatch = new Hatch(ctx, plgn);
-  hatch.lines(5, 0.5);
+  hatch.lines(0, 0.5);
 
+  // ctx.restore();
+
+  ctx.moveTo(0, 0);
+  ctx.lineTo(100, 100); // TODO: this line should show !!
   ctx.stroke();
 }

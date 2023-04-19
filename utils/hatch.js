@@ -8,18 +8,11 @@ const Hatch = function (ctx, polygon) {
   const diag = bb.diagonal();
   const center = bb.center();
   const tlbr = bb.points();
-  const dbb = centered_rect_points(center, diag, diag);
 
   // Debug
-  bb.draw();
-
-  // draw the square circumscbribed in a circle with R = diagonal of bounding box
-  ctx.rect(dbb[0][0], dbb[0][1], dbb[1][0] - dbb[0][0], dbb[1][1] - dbb[0][1]);
-
   log(tlbr);
   log(center);
   log(diag);
-  log(dbb);
 
   /**
    * Simple straight lines
@@ -35,25 +28,17 @@ const Hatch = function (ctx, polygon) {
     log("Spacing: " + spacing);
 
     ctx.save();
-    ctx.translate(center[0], center[1]);
+    ctx.translate(round(center[0]), round(center[1]));
     ctx.rotate(radians);
 
-    ctx.moveTo(0, 0);
-    ctx.lineTo(100, 100);
-
-    // let y = dbb[0][1] + spacing;
-    // for (let i = 0; i < count; i++) {
-    //   log(y);
-    //   ctx.moveTo(dbb[0][0], y);
-    //   ctx.lineTo(dbb[1][0], y);
-    //   y += spacing;
-    // }
+    let y = -diag / 2 + spacing;
+    for (let i = 0; i < count; i++) {
+      ctx.moveTo(round(-diag / 2), round(y));
+      ctx.lineTo(round(diag / 2), round(y));
+      y += spacing;
+    }
 
     ctx.restore();
-
-    ctx.moveTo(0, 0);
-    ctx.lineTo(100, 100);
-    ctx.stroke();
   };
 
   function line_count(diagonal, density) {
