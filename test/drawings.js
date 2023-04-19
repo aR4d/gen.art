@@ -1,3 +1,25 @@
+// draws a cross that marks the center of the canvas
+function draw_canvas_center() {
+  const canvases = D.getElementsByTagName("canvas");
+  if (canvases && canvases.length !== 1) {
+    throw new Error("Exactly one canvas element is expected");
+  }
+  const sizeOnScreen = canvases[0].getBoundingClientRect();
+
+  const ctx = canvases[0].getContext("2d", { alpha: false });
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  ctx.moveTo(sizeOnScreen.width / 2, 0);
+  ctx.lineTo(sizeOnScreen.width / 2, sizeOnScreen.height);
+  ctx.moveTo(0, sizeOnScreen.height / 2);
+  ctx.lineTo(sizeOnScreen.width, sizeOnScreen.height / 2);
+  ctx.stroke();
+  ctx.closePath();
+  ctx.setLineDash([]);
+}
+
 function canvas_api_300_x_400_px(ctx) {
   ctx.lineWidth = 2;
   ctx.strokeStyle = "#f00";
@@ -94,8 +116,19 @@ function draw_lines(ctx) {
   }
 }
 
-function draw_bounding_box_test(ctx) {
-  const polygon = polygon_points(150, 200, 6, 50, 53);
-  draw_polygon_from_points(ctx, polygon);
-  draw_bounding_box(ctx, polygon);
+function lines_hatch_test(ctx) {
+  const plgn = [
+    [158, 280],
+    [81, 210],
+    [119, 137],
+    [200, 151],
+    [272, 233],
+  ];
+  // const plgn = polygon_points(150, 200, 5, 70, 28);
+  draw_polygon_from_points(ctx, plgn);
+
+  const hatch = new Hatch(ctx, plgn);
+  hatch.lines(5, 0.5);
+
+  ctx.stroke();
 }

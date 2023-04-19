@@ -66,18 +66,6 @@ class Textures {
     this.ctx.stroke();
   }
 
-  hatch() {
-    const offset = this.height / this.count;
-    let y = this.topLeft[1] + offset;
-    // this.ctx.rotate((10 * PI) / 180);
-    for (let i = 0; i < this.count; i++) {
-      this.ctx.moveTo(this.topLeft[0], round(y));
-      this.ctx.lineTo(this.bottomRight[0], round(y));
-      y += offset;
-    }
-    this.ctx.stroke();
-  }
-
   stripes() {}
 
   y() {

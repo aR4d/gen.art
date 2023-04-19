@@ -1,34 +1,28 @@
-// middle point between 2 points - 2D
+/**
+ * Gets the middle point between 2 points - 2D space
+ * @param {*} P1 [x1, y1]
+ * @param {*} P2 [x2, y2]
+ * @returns [x, y]
+ */
 const midpoint = ([x1, y1], [x2, y2]) => [(x1 + x2) / 2, (y1 + y2) / 2];
 
-// distance between 2 points - 2D
+/**
+ * Gets the distance between 2 points - 2D space
+ * @param {*} P1 [x1, y1]
+ * @param {*} P2 [x2, y2]
+ * @returns Number
+ */
 const dist = ([x1, y1], [x2, y2]) => sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
-// gets the top-left and bottom right corner points of a polygon
-// that define it's bounding box
-// polygon - [[x1, y1], [x2, y2], ...]
-function bounding_box_points(polygon) {
-  let xMin = (xMax = polygon[0][0]),
-    yMin = (yMax = polygon[0][1]);
-  for (let i = 0; i < polygon.length; i++) {
-    if (polygon[i][0] < xMin) xMin = polygon[i][0];
-    if (polygon[i][0] > xMax) xMax = polygon[i][0];
-    if (polygon[i][1] < yMin) yMin = polygon[i][1];
-    if (polygon[i][1] > yMax) yMax = polygon[i][1];
-  }
-  return [
-    [xMin, yMin],
-    [xMax, yMax],
-  ];
-}
-
-function draw_bounding_box(ctx, polygon) {
-  const bb = bounding_box_points(polygon);
-  ctx.rect(bb[0][0], bb[0][1], bb[1][0] - bb[0][0], bb[1][1] - bb[0][1]);
-}
-
-// gets the points for a regular polygon [[x1, y1], [x2, y2], ...]
-// centered in [x, y]
+/**
+ * Gets the points for a regular polygon
+ * @param {*} x polygon center X-axis
+ * @param {*} y poygon center Y-axis
+ * @param {*} sides number of sides
+ * @param {*} size the overall size of the polygon
+ * @param {*} rotation in degrees
+ * @returns [[x1, y1], [x2, y2], ..., [xN, yN]]
+ */
 function polygon_points(x, y, sides, size, rotation) {
   const theta = (rotation * PI) / 180;
   const pts = [];
@@ -54,18 +48,44 @@ function draw_polygon_from_points(ctx, pts) {
   ctx.closePath();
 }
 
-// draws a line from an initial point [x, y] using polar coordinates
-// theta in radians
+/**
+ * Draws a line from an initial point using polar coordinates
+ * @param {CanvasRenderingContext2D} ctx canvas context
+ * @param {*} origin starting point of the line - [x, y]
+ * @param {*} r line length
+ * @param {*} theta line angle in radians
+ */
 function draw_polar_line(ctx, [x, y], r, theta) {
   ctx.moveTo(x, y);
   ctx.lineTo(x + r * cos(theta), y + r * sin(theta));
 }
 
-// splits a line segment in the middle recursively
-// returns the array of points
-// depth = 1 -> 2 segments (3 points)
-// depth = 2 -> 4 segments (5 points)
-// depth = 3 -> 8 segments (9 points)
+/**
+ * Rotates a point around an origin.
+ * @param {*} cx - X coord of point around which to rotate
+ * @param {*} cy - Y coord of point around which to rotate
+ * @param {*} x - X coord of point to rotate
+ * @param {*} y - Y coord of point to rotate
+ * @param {*} radians - angle to rotate in radians
+ * @returns the rotated point [x, y]
+ */
+function rotate_point(cx, cy, x, y, radians) {
+  const cs = cos(radians),
+    sn = sin(radians);
+  return [round(cs * (x - cx) + sn * (y - cy) + cx), round(cs * (y - cy) - sn * (x - cx) + cy)];
+}
+
+/**
+ * Splits a line segment in the middle, recursively
+ * depth = 1 -> 2 segments (3 points)
+ * depth = 2 -> 4 segments (5 points)
+ * depth = 3 -> 8 segments (9 points)
+ *
+ * @param {*} depth of recursion
+ * @param {*} a endpoint of the segment - [x, y]
+ * @param {*} b endpoint of the segment - [x, y]
+ * @returns
+ */
 function split_segment(depth, a, b) {
   let pts0 = [a, b];
   for (let d = 0; d < depth; d++) {
@@ -76,24 +96,17 @@ function split_segment(depth, a, b) {
   return pts0;
 }
 
-// draws a cross that marks the center of the canvas
-function draw_canvas_center() {
-  const canvases = D.getElementsByTagName("canvas");
-  if (canvases && canvases.length !== 1) {
-    throw new Error("Exactly one canvas element is expected");
-  }
-  const sizeOnScreen = canvases[0].getBoundingClientRect();
-
-  const ctx = canvases[0].getContext("2d", { alpha: false });
-  ctx.strokeStyle = "black";
-  ctx.lineWidth = 1;
-  ctx.setLineDash([5, 5]);
-  ctx.beginPath();
-  ctx.moveTo(sizeOnScreen.width / 2, 0);
-  ctx.lineTo(sizeOnScreen.width / 2, sizeOnScreen.height);
-  ctx.moveTo(0, sizeOnScreen.height / 2);
-  ctx.lineTo(sizeOnScreen.width, sizeOnScreen.height / 2);
-  ctx.stroke();
-  ctx.closePath();
-  ctx.setLineDash([]);
+/**
+ * Gets the top-left and bottom right corner points of a centered rectangle.
+ * @param {*} x rectangle center X-axis
+ * @param {*} y rectangle center Y-axis
+ * @param {*} w rectangle width
+ * @param {*} h rectangle height
+ * @returns [[xMin, yMin], [xMax, yMax]]
+ */
+function centered_rect_points([x, y], w, h) {
+  return [
+    [x - w / 2, y - h / 2],
+    [x + w / 2, y + h / 2],
+  ];
 }

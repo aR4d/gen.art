@@ -20,7 +20,9 @@
   <script type="text/javascript" src="./utils/colors.js"></script>
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./utils/geometry.js"></script>
+  <script type="text/javascript" src="./utils/boundingBox.js"></script>
   <script type="text/javascript" src="./utils/textures.js "></script>
+  <script type="text/javascript" src="./utils/hatch.js "></script>
   <script type="text/javascript" src="./test/drawings.js"></script>
   <script type="text/javascript" src="./effects/watercolor.js"></script>
   <script type="text/javascript">
@@ -64,18 +66,18 @@
 
     // draw_texture(ctx, 0, 0, 300, 400, 5, 2, 30);
 
-    const count = 100;
-    const txt1 = new Textures(ctx, count, [0, 0], [150, 200]);
-    const txt2 = new Textures(ctx, count, [150, 0], [300, 200]);
-    const txt3 = new Textures(ctx, count, [0, 200], [150, 400]);
-    const txt4 = new Textures(ctx, count, [150, 200], [300, 400]);
+    // const count = 10;
+    // const txt1 = new Textures(ctx, count, [0, 0], [150, 200]);
+    // const txt2 = new Textures(ctx, count, [150, 0], [300, 200]);
+    // const txt3 = new Textures(ctx, count, [0, 200], [150, 400]);
 
-    txt4.info();
+    // txt1.info();
 
-    txt1.rectangles();
-    txt2.circles();
-    txt3.line();
-    txt4.hatch();
+    // txt1.rectangles();
+    // txt2.circles();
+    // txt3.line();
+
+    lines_hatch_test(ctx);
 
     console.timeEnd("looping #1");
 
