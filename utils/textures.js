@@ -66,8 +66,6 @@ class Textures {
     this.ctx.stroke();
   }
 
-  stripes() {}
-
   y() {
     return R.random_int(this.topLeft[1], this.bottomRight[1]);
   }

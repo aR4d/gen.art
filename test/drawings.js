@@ -117,25 +117,24 @@ function draw_lines(ctx) {
 }
 
 function lines_hatch_test(ctx) {
-  const plgn = [
+  const plgn0 = [
     [158, 280],
     [81, 210],
     [119, 137],
     [200, 151],
     [272, 233],
   ];
-  // const plgn = polygon_points(150, 200, 5, 70, 225);
+  const plgn1 = polygon_points(50, 50, 5, 30, 225);
 
-  // ctx.save();
-  draw_polygon_from_points(ctx, plgn);
-  ctx.clip();
+  const hatch0 = new Hatch(ctx, plgn0);
+  const hatch1 = new Hatch(ctx, plgn1);
 
-  const hatch = new Hatch(ctx, plgn);
-  hatch.lines(0, 0.5);
+  // hatch0.lines(20, 0.5);
+  hatch1.lines(30, 0.5);
 
-  // ctx.restore();
-
+  // TODO: the clipping region set by the FIRST polygon is still taken into account!!!!
+  // TODO: this line should show !!
   ctx.moveTo(0, 0);
-  ctx.lineTo(100, 100); // TODO: this line should show !!
+  ctx.lineTo(100, 100);
   ctx.stroke();
 }
