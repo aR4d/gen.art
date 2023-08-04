@@ -16,7 +16,7 @@
   <body></body>
   <script type="text/javascript" src="./utils/random.js"></script>
   <script type="text/javascript" src="./utils/globals.js"></script>
-  <script type="text/javascript" src="./utils/brushes.js "></script>
+  <script type="text/javascript" src="./utils/lines.js "></script>
   <script type="text/javascript" src="./utils/colors.js"></script>
   <script type="text/javascript" src="./utils/canvas.js"></script>
   <script type="text/javascript" src="./utils/geometry.js"></script>
@@ -78,7 +78,54 @@
     // txt2.circles();
     // txt3.line();
 
-    lines_hatch_test(ctx);
+    // lines_hatch_test(ctx);
+
+    const c2 = [
+      [130, 270],
+      [22, 219],
+      [11, 99],
+      [110, 30],
+      [218, 81],
+      [229, 201],
+    ];
+
+    const c1 = [
+      [158, 280],
+      [81, 210],
+      [119, 137],
+      [200, 151],
+      [272, 233],
+    ];
+
+    // pixelated(c1);
+    // pixelated(c2);
+
+    const lines = new Lines(ctx);
+
+    lines.setType(LineType.Pixelated);
+    lines.weight(5);
+    lines.color("#8bb3b4");
+    lines.draw(c1);
+
+    // lines.setType(LineType.Solid);
+    // lines.setType(LineType.CloseDots);
+    // lines.setType(LineType.TwoDashTwoSpace);
+    // lines.setType(LineType.ThreeDashSpace);
+    // lines.setType(LineType.ThreeDashDot);
+    // lines.setType(LineType.FourDashThreeDot);
+    lines.weight(7);
+    lines.color("#CC5439");
+    lines.draw(c2);
+
+    // const x = 141,
+    //   y = 141;
+    // pixelated_lineTo([10, 10], [x, y]);
+
+    // ctx.beginPath();
+    // ctx.fillStyle = "#CC5439";
+    // ctx.rect(10, 10, 1, 1);
+    // ctx.rect(x, y, 1, 1);
+    // ctx.fill();
 
     console.timeEnd("looping #1");
 
