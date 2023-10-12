@@ -52,6 +52,17 @@ class Random {
   random_choice(list) {
     return list[this.random_int(0, list.length - 1)];
   }
+  // random value with p as percent liklihood of being chosen in an array of items
+  // items in format [item, p]
+  // requires all p's to add up to 1.0
+  random_choice_weighted(list) {
+    let r = this.random_dec(),
+      p = 0;
+    for (let i = 0; i < list.length; i++) {
+      p += list[i][1];
+      if (r < p) return list[i][0];
+    }
+  }
   // random real number from a standard Gaussian distribution
   gaussian(mean = 0, stdev = 1) {
     return Math.sqrt(-2.0 * Math.log(1 - this.random_dec())) * Math.cos(2.0 * Math.PI * this.random_dec()) * stdev + mean;

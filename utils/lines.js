@@ -129,6 +129,6 @@ class Pixelated {
   }
 
   setPixel(x0, y0, size) {
-    ctx.rect(x0, y0, size, size);
+    this.ctx.rect(x0, y0, size, size);
   }
 }
